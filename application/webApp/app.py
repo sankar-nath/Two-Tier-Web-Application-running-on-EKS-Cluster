@@ -1,5 +1,4 @@
-from flask import Flask, render_template, request, redirect, send_file
-import boto3
+from flask import Flask, render_template, request
 from pymysql import connections
 import os
 import random
@@ -10,24 +9,10 @@ app = Flask(__name__)
 
 DBHOST = os.environ.get("DBHOST") or "localhost"
 DBUSER = os.environ.get("DBUSER") or "root"
-DBPWD = os.environ.get("DBPWD") or "password"
+DBPWD = os.environ.get("DBPWD") or "passwors"
 DATABASE = os.environ.get("DATABASE") or "employees"
 COLOR_FROM_ENV = os.environ.get('APP_COLOR') or "lime"
-DBPORT = int(os.environ.get("DBPORT")) or 3306
-
-bucketName= os.environ.get("background") or "group5jaas"
-groupName=os.environ.get("groupName") or "group 5"
-fileName= "microsoft.jpeg"
-
-def download_file(fileName, bucketName):
-    """
-    Function to download a given file from an S3 bucket
-    """
-    s3 = boto3.resource('s3')
-    output = f"downloads/{fileName}"
-    s3.Bucket(bucketName).download_file(fileName, output)
-
-    return output
+DBPORT = int(os.environ.get("DBPORT"))
 
 # Create a connection to the MySQL database
 db_conn = connections.Connection(
