@@ -15,6 +15,20 @@ DATABASE = os.environ.get("DATABASE") or "employees"
 COLOR_FROM_ENV = os.environ.get('APP_COLOR') or "lime"
 DBPORT = int(os.environ.get("DBPORT")) or 3306
 
+bucketName= os.environ.get("background") or "group5jaas"
+groupName=os.environ.get("groupName") or "group 5"
+fileName= "microsoft.jpeg"
+
+def download_file(fileName, bucketName):
+    """
+    Function to download a given file from an S3 bucket
+    """
+    s3 = boto3.resource('s3')
+    output = f"downloads/{fileName}"
+    s3.Bucket(bucketName).download_file(fileName, output)
+
+    return output
+
 # Create a connection to the MySQL database
 db_conn = connections.Connection(
     host= DBHOST,
