@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: colorapp-configmap
 data:
-  s3-bucket: group5JAAS #bucketname
-  group-name: group5JAAS
+  s3-bucket: group5jaas #bucketname
+  group-name: group5jaas
