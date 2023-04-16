@@ -9,6 +9,9 @@ Instructions
 4. Use kubectl apply on the yaml files to set up the pods, the replicasets and the deployment. 
 5. The application can be accessed from the public IP of the EC2 instance once the NodePort has been exposed. You may need to modify the security group to achieve this.
 4. Use the public IP:Port of the ec2 instance to access the web app
+5. 
+
+docker run -p 8080:8080  -e DBHOST=$DBHOST -e DBPORT=$DBPORT -e  DBUSER=$DBUSER -e DBPWD=$DBPWD app
 
 # Install the required MySQL package
 

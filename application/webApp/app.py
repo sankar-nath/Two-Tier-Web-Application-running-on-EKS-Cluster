@@ -51,7 +51,11 @@ def download_file(fileName, bucket_name):
     """
     Function to download a given file from an S3 bucket
     """
-    s3 = boto3.resource('s3')
+    s3 = boto3.resource("s3",
+            aws_access_key_id='ASIAVHRCFEULB3BRJMX2',
+            aws_secret_access_key='PkWgkOeauBtam8hEVKCTZaZs7RbW5eVKWJRgjv8P',
+            aws_session_token='FwoGZXIvYXdzEEkaDDY7aAN2ynCgsb7TmCLGAQjWQft2Be9yro+tbeIH8+5cSzbxPilz/K3Qf4SXzyK7VqMV7y637zoqQIlZa/GKvPnuQkabfznsT6S+oMW6TpGcs/sMH6cmSPmCE/FariT2ioBij46yILHCwveFWyYDlrhBXvNJm+kXu6OlIKssnHUi/CdwvEjqS0Pb+ri7HE7KHyYSuMu020WBIpf74guFut36zSm4JTn2oguP20/S4+FcHwyI1/Zlbb3CcJyBJTI3A5/RB9b6RsD5u+C9Lb7AGri1ME+VpCjHtPChBjIt4LRDQ/mxADpd8jb32s2UD+pdd9ISF+Qun2q+bY7quU8eaW4UuwAUfidILN6+'
+            )
     print(bucket_name)
     s3.Bucket(bucket_name).download_file(object_name,imagePath)
     return imagePath
