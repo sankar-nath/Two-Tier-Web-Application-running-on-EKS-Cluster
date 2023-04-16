@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, render_template, request
+import boto3
 from pymysql import connections
 import os
 import random
@@ -12,7 +13,45 @@ DBUSER = os.environ.get("DBUSER") or "root"
 DBPWD = os.environ.get("DBPWD") or "passwors"
 DATABASE = os.environ.get("DATABASE") or "employees"
 COLOR_FROM_ENV = os.environ.get('APP_COLOR') or "lime"
-DBPORT = int(os.environ.get("DBPORT"))
+DBPORT = int(os.environ.get("DBPORT")) or 3306
+bucket_name= "group5jaas"
+
+key_id= os.environ.get("aws_access_key_id") or "ASIAVHRCFEULIBGXX4IE"
+access_key= os.environ.get("aws_secret_access_key") or "TwTxATtQwH9ObBDoERytJejZCubbxzxBSkpOcMXf"
+session_token= os.environ.get("aws_session_token") or "FwoGZXIvYXdzEEYaDBqhQP+eTk1w7EotsiLGAa3p9efQx6UGTSqgsAfkfiYBZd6cWgAe/J9o7qSYzCga3/C2xlMx6i4HqGUrOPpOeOX3bdExgvmxqFDBuvcgyCdw3L+3uS8RlD/Bm/Inccb9r6ESAkHCC48JNfhP9Wt7u8oUnDa2M8KxSH52eJEl0lgvGOiWR+CVKD16qfkwtQcPQ1HDx6cIV4AMg+ywX26r7WdJ33TYJ+VrFAHa5Al9wyj+1pUAOuzcg7rPmfTUWCK4W2sSL3Sa6Oqo0/2gb6RUrPIrltVDayif4++hBjItBdIzyFGAHTKFQDGcwBS7rgfkDtrJj/R6Mio5xoFd6TFTXKTkJqyHdT3ED4cJ"
+groupname= "group 5"
+fileName= "jello.jpg"
+
+#Download the Image from s3 bucket
+def download_file(fileName, bucket_name):
+    
+    directory = "static"
+    if os.path.exists(directory) and os.path.isdir(directory):
+        print("Directory exists")
+    else:
+        os.makedirs(directory)
+    imagePath = os.path.join(directory, "jello.jpg")
+    print(imagePath)
+    """
+    Function to download a given file from an S3 bucket
+    """
+    s3 = boto3.resource('s3',
+         aws_access_key_id= 'key_id',
+         aws_secret_access_key= 'access_key',
+         aws_session_token = 'session_token',
+         aws_region = 'us-east-1'
+         )
+         
+         
+    
+    print({bucket_name})
+    s3.Bucket('group5jaas').download_file('jello.jpg',imagePath)
+    return imagePath
+
+
+    
+
+
 
 # Create a connection to the MySQL database
 db_conn = connections.Connection(
@@ -47,7 +86,7 @@ COLOR = random.choice(["red", "green", "blue", "blue2", "darkblue", "pink", "lim
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('addemp.html', color=color_codes[COLOR])
+    return render_template('addemp.html', color=color_codes[COLOR], group=groupname)
 
 @app.route("/about", methods=['GET','POST'])
 def about():
@@ -111,6 +150,8 @@ def FetchData():
                            lname=output["last_name"], interest=output["primary_skills"], location=output["location"], color=color_codes[COLOR])
 
 if __name__ == '__main__':
+    image=download_file(fileName, bucket_name)
+    print(image)
     
     # Check for Command Line Parameters for color
     parser = argparse.ArgumentParser()
