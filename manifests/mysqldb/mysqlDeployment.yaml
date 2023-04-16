@@ -5,7 +5,7 @@ metadata:
   labels:
     app: mysqldb
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: mysqldb
@@ -14,6 +14,10 @@ spec:
       labels:
         app: mysqldb
     spec:
+      volumes:
+      - name: mysql-pv
+        persistentVolumeClaim:
+          claimName: mysql-pvc
       containers:
       - name: mysqldb
         image: 103269930504.dkr.ecr.us-east-1.amazonaws.com/mysqldb-awsecr:latest
@@ -24,4 +28,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: mysql-secret
-              key: password 
+              key: password
+        volumeMounts:
+        - name: mysql-pv
+          mountPath: /var/lib/mysql
