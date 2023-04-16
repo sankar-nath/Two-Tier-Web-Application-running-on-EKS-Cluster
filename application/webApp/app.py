@@ -16,7 +16,7 @@ DATABASE = os.environ.get("DATABASE") or "employees"
 COLOR_FROM_ENV = os.environ.get('APP_COLOR') or "lime"
 DBPORT = int(os.environ.get("DBPORT")) or 3306
 bucket_name= "group5jaas2"
-image_url="https://group5jaas2.s3.amazonaws.com/jello.jpg"
+image_url="https://group5jaas2.s3.amazonaws.com/new.jpg"
 
 key_id= os.environ.get("aws_access_key_id") 
 access_key= os.environ.get("aws_secret_access_key") 
@@ -42,24 +42,17 @@ def download_file(fileName, bucket_name):
         print("Directory exists")
     else:
         os.makedirs(directory)
-    imagePath = os.path.join(directory, "jello.jpg")
+    imagePath = os.path.join(directory, fileName)
     print(imagePath)
-    object_name = "jello.jpg"
+    object_name = "new.jpg"
     print(bucket_name)
     print(object_name)  
     
     """
     Function to download a given file from an S3 bucket
     """
-    s3 = boto3.resource('s3',
-         aws_access_key_id= 'key_id',
-         aws_secret_access_key= 'access_key',
-         aws_session_token = 'session_token'
-         )
-         
-         
-    
-    print({bucket_name})
+    s3 = boto3.resource('s3')
+    print(bucket_name)
     s3.Bucket(bucket_name).download_file(object_name,imagePath)
     return imagePath
 
@@ -165,8 +158,8 @@ def FetchData():
                            lname=output["last_name"], interest=output["primary_skills"], location=output["location"], color=color_codes[COLOR])
 
 if __name__ == '__main__':
-    image=download_image('https://group5jaas.s3.amazonaws.com/jello.jpg', '/static/jello.jpg')
-    #image=download_file=(fileName, bucket_name)
+    #image=download_image('https://group5jaas.s3.amazonaws.com/jello.jpg', '/static/jello.jpg')
+    image=download_file(fileName, bucket_name)
     print(image)
     
     # Check for Command Line Parameters for color

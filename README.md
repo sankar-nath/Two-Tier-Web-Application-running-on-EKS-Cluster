@@ -1,10 +1,10 @@
-This repository was cloned from my professor's repo to complete the second assignment for CLO835
-In this Assignment we deployed containerized application on a K8s kind cluster running on an Ec2 instance. The web application takes in employee details and stores it in a database. Both the app and the database are being run as containers running on an EC2 instance.
+This repository was cloned from our professor's repo to complete the final project for CLO835
+In this Project we deployed a containerized flask application on a K8s EKS cluster running on AWS. The web application takes in employee details and stores it in a database. Both the app and the database are being run as containers running on an EC2 instance.
 
 Instructions
-1. Go to the terraformCode folder and run tf to create the EC2 instance, two ECR repositories and the security group.
+1. Run the docker containers locally from within application/webApp and application/database
 2. From the repository, run the ecr.yml file to create docker images which will get pushed to the ECR repositories
-3. Copy the manifests folder into the ec2 instance's /tmp folder
+3. Copy the manifests folder into the cluster
 3. Log in to EC2 instance using ssh, set up the kind cluster using the init_kind.sh and kind.yaml files. You may need to chmod 777 the files.
 4. Use kubectl apply on the yaml files to set up the pods, the replicasets and the deployment. 
 5. The application can be accessed from the public IP of the EC2 instance once the NodePort has been exposed. You may need to modify the security group to achieve this.
