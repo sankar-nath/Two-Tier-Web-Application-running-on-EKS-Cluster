@@ -3,6 +3,7 @@ import boto3
 from pymysql import connections
 import os
 import random
+import requests
 import argparse
 
 
@@ -14,13 +15,24 @@ DBPWD = os.environ.get("DBPWD") or "passwors"
 DATABASE = os.environ.get("DATABASE") or "employees"
 COLOR_FROM_ENV = os.environ.get('APP_COLOR') or "lime"
 DBPORT = int(os.environ.get("DBPORT")) or 3306
-bucket_name= "group5jaas"
+bucket_name= "group5jaas2"
+image_url="https://group5jaas2.s3.amazonaws.com/jello.jpg"
 
-key_id= os.environ.get("aws_access_key_id") or "ASIAVHRCFEULIBGXX4IE"
-access_key= os.environ.get("aws_secret_access_key") or "TwTxATtQwH9ObBDoERytJejZCubbxzxBSkpOcMXf"
-session_token= os.environ.get("aws_session_token") or "FwoGZXIvYXdzEEYaDBqhQP+eTk1w7EotsiLGAa3p9efQx6UGTSqgsAfkfiYBZd6cWgAe/J9o7qSYzCga3/C2xlMx6i4HqGUrOPpOeOX3bdExgvmxqFDBuvcgyCdw3L+3uS8RlD/Bm/Inccb9r6ESAkHCC48JNfhP9Wt7u8oUnDa2M8KxSH52eJEl0lgvGOiWR+CVKD16qfkwtQcPQ1HDx6cIV4AMg+ywX26r7WdJ33TYJ+VrFAHa5Al9wyj+1pUAOuzcg7rPmfTUWCK4W2sSL3Sa6Oqo0/2gb6RUrPIrltVDayif4++hBjItBdIzyFGAHTKFQDGcwBS7rgfkDtrJj/R6Mio5xoFd6TFTXKTkJqyHdT3ED4cJ"
+key_id= os.environ.get("aws_access_key_id") 
+access_key= os.environ.get("aws_secret_access_key") 
+session_token= os.environ.get("aws_session_token") 
 groupname= "group 5"
 fileName= "jello.jpg"
+
+def download_image(image_url, image_path):
+    response = requests.get(image_url)
+    imagePath = os.path.join(image_path, "jello.jpg")
+    if response.status_code == 200:
+        with open(os.path.join(image_path, 'jello.jpg'), 'wb') as f:
+            f.write(response.content)
+            return imagePath
+    else:
+        return imagePath
 
 #Download the Image from s3 bucket
 def download_file(fileName, bucket_name):
@@ -32,6 +44,12 @@ def download_file(fileName, bucket_name):
         os.makedirs(directory)
     imagePath = os.path.join(directory, "jello.jpg")
     print(imagePath)
+    
+    
+    object_name = "jello.jpg"
+    print(bucket_name)  # prints 
+    print(object_name)  # prints 
+    
     """
     Function to download a given file from an S3 bucket
     """
@@ -44,7 +62,7 @@ def download_file(fileName, bucket_name):
          
     
     print({bucket_name})
-    s3.Bucket('group5jaas').download_file('jello.jpg',imagePath)
+    s3.Bucket(bucket_name).download_file(object_name,imagePath)
     return imagePath
 
 
@@ -149,7 +167,8 @@ def FetchData():
                            lname=output["last_name"], interest=output["primary_skills"], location=output["location"], color=color_codes[COLOR])
 
 if __name__ == '__main__':
-    image=download_file(fileName, bucket_name)
+    image=download_image('https://group5jaas.s3.amazonaws.com/jello.jpg', '/static/jello.jpg')
+    #image=download_file=(fileName, bucket_name)
     print(image)
     
     # Check for Command Line Parameters for color
