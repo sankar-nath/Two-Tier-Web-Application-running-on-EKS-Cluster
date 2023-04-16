@@ -15,7 +15,7 @@ DBPWD = os.environ.get("DBPWD") or "passwors"
 DATABASE = os.environ.get("DATABASE") or "employees"
 COLOR_FROM_ENV = os.environ.get('APP_COLOR') or "lime"
 DBPORT = int(os.environ.get("DBPORT")) or 3306
-groupclo835 = int(os.environ.get("GROUPNAME")) or "defaultGroup"
+groupclo835 = os.environ.get("GROUPNAME") or "defaultGroup"
 bucket_name= "group5jaas2"
 image_url="https://group5jaas2.s3.amazonaws.com/jello.jpg"
 
