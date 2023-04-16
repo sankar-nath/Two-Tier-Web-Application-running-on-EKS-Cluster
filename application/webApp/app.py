@@ -44,11 +44,9 @@ def download_file(fileName, bucket_name):
         os.makedirs(directory)
     imagePath = os.path.join(directory, "jello.jpg")
     print(imagePath)
-    
-    
     object_name = "jello.jpg"
-    print(bucket_name)  # prints 
-    print(object_name)  # prints 
+    print(bucket_name)
+    print(object_name)  
     
     """
     Function to download a given file from an S3 bucket
