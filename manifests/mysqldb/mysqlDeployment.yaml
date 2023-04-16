@@ -5,7 +5,7 @@ metadata:
   labels:
     app: mysqldb
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: mysqldb
@@ -24,4 +24,11 @@ spec:
           valueFrom:
             secretKeyRef:
               name: mysql-secret
-              key: password 
+              key: password
+        volumeMounts:
+        - name: mysql-pv
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-pv
+        persistentVolumeClaim:
+          claimName: ebs-pvc
