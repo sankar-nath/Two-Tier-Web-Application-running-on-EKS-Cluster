@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: colorapp-configmap
+data:
+  s3-bucket: group5jaas #bucketname
+  groupCLO835: group5clo835
