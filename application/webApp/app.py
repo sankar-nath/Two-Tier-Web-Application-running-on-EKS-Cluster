@@ -38,8 +38,7 @@ def download_file(fileName, bucket_name):
     s3 = boto3.resource('s3',
          aws_access_key_id= 'key_id',
          aws_secret_access_key= 'access_key',
-         aws_session_token = 'session_token',
-         aws_region = 'us-east-1'
+         aws_session_token = 'session_token'
          )
          
          
