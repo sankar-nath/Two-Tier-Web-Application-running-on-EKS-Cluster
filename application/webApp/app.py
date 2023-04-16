@@ -26,13 +26,13 @@ fileName= "jello.jpg"
 
 def download_image(image_url, image_path):
     response = requests.get(image_url)
-    imagePath = os.path.join(image_path, "jello.jpg")
+    #imagePath = os.path.join(image_path, "jello.jpg")
     if response.status_code == 200:
-        with open(os.path.join(image_path, 'jello.jpg'), 'wb') as f:
+        with open(os.path.join('static', 'jello.jpg'), 'wb') as f:
             f.write(response.content)
-            return imagePath
+            return image_path
     else:
-        return imagePath
+        return image_path
 
 #Download the Image from s3 bucket
 def download_file(fileName, bucket_name):
