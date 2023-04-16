@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: colorapp
-          image: 359775151382.dkr.ecr.us-east-1.amazonaws.com/colorapp-awsecr:latest
+          image: 103269930504.dkr.ecr.us-east-1.amazonaws.com/colorapp-awsecr:latest
           imagePullPolicy: Always
           env:
             - name: DBHOST
