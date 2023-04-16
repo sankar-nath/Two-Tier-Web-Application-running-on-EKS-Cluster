@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, render_template, request
+import boto3
 from pymysql import connections
 import os
 import random
+import requests
 import argparse
 
 
@@ -12,7 +14,61 @@ DBUSER = os.environ.get("DBUSER") or "root"
 DBPWD = os.environ.get("DBPWD") or "passwors"
 DATABASE = os.environ.get("DATABASE") or "employees"
 COLOR_FROM_ENV = os.environ.get('APP_COLOR') or "lime"
-DBPORT = int(os.environ.get("DBPORT"))
+DBPORT = int(os.environ.get("DBPORT")) or 3306
+bucket_name= "group5jaas2"
+image_url="https://group5jaas2.s3.amazonaws.com/jello.jpg"
+
+key_id= os.environ.get("aws_access_key_id") 
+access_key= os.environ.get("aws_secret_access_key") 
+session_token= os.environ.get("aws_session_token") 
+groupname= "group 5"
+fileName= "jello.jpg"
+
+def download_image(image_url, image_path):
+    response = requests.get(image_url)
+    #imagePath = os.path.join(image_path, "jello.jpg")
+    if response.status_code == 200:
+        with open(os.path.join('static', 'jello.jpg'), 'wb') as f:
+            f.write(response.content)
+            return image_path
+    else:
+        return image_path
+
+#Download the Image from s3 bucket
+def download_file(fileName, bucket_name):
+    
+    directory = "static"
+    if os.path.exists(directory) and os.path.isdir(directory):
+        print("Directory exists")
+    else:
+        os.makedirs(directory)
+    imagePath = os.path.join(directory, "jello.jpg")
+    print(imagePath)
+    
+    
+    object_name = "jello.jpg"
+    print(bucket_name)  # prints 
+    print(object_name)  # prints 
+    
+    """
+    Function to download a given file from an S3 bucket
+    """
+    s3 = boto3.resource('s3',
+         aws_access_key_id= 'key_id',
+         aws_secret_access_key= 'access_key',
+         aws_session_token = 'session_token'
+         )
+         
+         
+    
+    print({bucket_name})
+    s3.Bucket(bucket_name).download_file(object_name,imagePath)
+    return imagePath
+
+
+    
+
+
 
 # Create a connection to the MySQL database
 db_conn = connections.Connection(
@@ -47,7 +103,7 @@ COLOR = random.choice(["red", "green", "blue", "blue2", "darkblue", "pink", "lim
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('addemp.html', color=color_codes[COLOR])
+    return render_template('addemp.html', color=color_codes[COLOR], group=groupname)
 
 @app.route("/about", methods=['GET','POST'])
 def about():
@@ -111,6 +167,9 @@ def FetchData():
                            lname=output["last_name"], interest=output["primary_skills"], location=output["location"], color=color_codes[COLOR])
 
 if __name__ == '__main__':
+    image=download_image('https://group5jaas.s3.amazonaws.com/jello.jpg', '/static/jello.jpg')
+    #image=download_file=(fileName, bucket_name)
+    print(image)
     
     # Check for Command Line Parameters for color
     parser = argparse.ArgumentParser()
