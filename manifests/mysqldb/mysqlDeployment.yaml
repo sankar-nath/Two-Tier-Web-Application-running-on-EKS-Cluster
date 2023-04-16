@@ -14,10 +14,6 @@ spec:
       labels:
         app: mysqldb
     spec:
-      volumes:
-      - name: mysql-pv
-        persistentVolumeClaim:
-          claimName: mysql-pvc
       containers:
       - name: mysqldb
         image: 103269930504.dkr.ecr.us-east-1.amazonaws.com/mysqldb-awsecr:latest
@@ -32,3 +28,7 @@ spec:
         volumeMounts:
         - name: mysql-pv
           mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-pv
+        persistentVolumeClaim:
+          claimName: ebs-pvc
