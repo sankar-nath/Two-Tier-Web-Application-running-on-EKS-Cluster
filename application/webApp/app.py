@@ -16,7 +16,7 @@ DATABASE = os.environ.get("DATABASE") or "employees"
 COLOR_FROM_ENV = os.environ.get('APP_COLOR') or "lime"
 DBPORT = int(os.environ.get("DBPORT")) or 3306
 groupclo835 = os.environ.get("GROUPNAME") or "defaultGroup"
-bucket_name= "group5privates3"
+bucket_name= "group5jaas2"
 #image_url="https://group5jaas2.s3.amazonaws.com/new.jpg"
 
 
@@ -50,9 +50,9 @@ def download_file(fileName, bucket_name):
     Function to download a given file from an S3 bucket
     """
     s3 = boto3.resource("s3",
-            aws_access_key_id='ASIARQC26CYEPWIRSDF7',
-            aws_secret_access_key='pL8wV2Ox8OUdlpoFrJos0befXHBvUnAlFam3g2/I',
-            aws_session_token='FwoGZXIvYXdzEFcaDMYBHXWzqxn1PuvS1yLOAT+oaddtED6C2rODMp4ee2Ui0tMP/Zfz5AfH0H/u73MHVzeXUAiU8koQ9KF7EoBzex5vJxCLELOYXe77FmFcPAmK1FhUuAolZ1/7QSV4ErBNvczASt0nTWP4vjUsN3JGjHoog9lB50iIT9/qW0pskz1PFFuU7W2f7y4WjraiLisE9IJI1m7Kfu6XbKmA2jAQTfpFuZ+FqUA+XCsHPI843H0rAy9ZuVKSfiQ5bfHvCc/6eQUDvr77aIS9Zyeq8NKthDKh38svMSH0he7nE6XUKNq886EGMi2chiA8sp6c3vHdL1zrS3/ikUwacneIQotn36x2VvS7XDXBlwBYIBuCcPa6FwU='
+            aws_access_key_id='ASIAVHRCFEULOAIJMXP7',
+            aws_secret_access_key='2chPlsE6ofETP5pW8EzWC5mGc6YCeglFXWTdXac/',
+            aws_session_token='FwoGZXIvYXdzEGAaDOTvwznig53agvpzhyLGAWE3FBC4qk8O/q4HaFcwkxuxBpfr5C6g+6XV9f4Uq+L2gAWcoI+8jDBoWncEGcNEfPylllw5Idpk+SC62ycKkIEMlGUyKCO0oVPqnt0Fwe0SxT03BxoLhXP0H7bzdS6f0XdHn5EJhA9UVkDOVkHWHMLJBxpk9/3cLELlR9Px9fVVbIRkA2tWvR37/RrnYT9XcLcAu4hfLVCQqVMviXQNADj8XakgsbAdH25Sy1K+Hn8ingFrxyb+z/bShIQcLeuTUD/GJ8X+0yifsfWhBjIt0wFA3OgkEyiyeOPeX7uVjtd6unM3wDLuUwO4Oq/AiyOsDq4M+ZPBFBBkd5AM'
             )
     print(bucket_name)
     s3.Bucket(bucket_name).download_file(objectName,imagePath)
