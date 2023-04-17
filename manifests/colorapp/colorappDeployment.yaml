@@ -23,7 +23,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: DBHOST
-              value: "mysqldb.group5-db.svc.cluster.local"
+              value: mysqldb
             - name: DBUSER
               valueFrom:
                 secretKeyRef:
@@ -41,5 +41,10 @@ spec:
                 configMapKeyRef:
                   name: colorapp-configmap
                   key: groupCLO835
+            - name: objectName
+              valueFrom:
+                configMapKeyRef:
+                  name: colorapp-configmap
+                  key: objectName
           ports:
               - containerPort: 81

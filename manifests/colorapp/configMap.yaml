@@ -6,4 +6,4 @@ data:
   s3-bucket: group5jaas #bucketname
   groupCLO835: group5clo835
   objectName: jello.jpg
-. GROUPNAME: group5jaas
+  GROUPNAME: group5jaas
