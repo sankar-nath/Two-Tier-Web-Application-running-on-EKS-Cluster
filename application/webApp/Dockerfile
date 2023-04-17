@@ -10,6 +10,6 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 RUN pip install boto3
 RUN pip install requests
-EXPOSE 8080
+EXPOSE 81
 ENTRYPOINT [ "python3" ]
 CMD [ "app.py" ]
