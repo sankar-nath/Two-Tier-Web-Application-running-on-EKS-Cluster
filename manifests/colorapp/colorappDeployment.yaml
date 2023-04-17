@@ -42,4 +42,4 @@ spec:
                   name: colorapp-configmap
                   key: groupCLO835
           ports:
-              - containerPort: 8080
+              - containerPort: 81
