@@ -39,7 +39,7 @@ spec:
             - name: GROUPNAME
               valueFrom:
                 configMapKeyRef:
-                name: colorapp-configmap
-                key: groupCLO835
+                  name: colorapp-configmap
+                  key: groupCLO835
           ports:
               - containerPort: 8080
