@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ebs-pv
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: gp2
+  awsElasticBlockStore:
+    volumeID: vol-0c785b798a0dd4c21
+    fsType: ext4

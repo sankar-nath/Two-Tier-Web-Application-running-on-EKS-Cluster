@@ -4,21 +4,21 @@ on:
   workflow_dispatch:
     branches:
     - master
-    - dev
+    - main
     paths:
     - ./**
   
   push:
     branches:
     - master
-    - dev
+    - main
     paths:
     - ./**
 
   pull_request:
     branches:
     - master
-    - dev
+    - main
     paths:
     - ./**
     
