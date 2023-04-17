@@ -165,7 +165,7 @@ def FetchData():
                            lname=output["last_name"], interest=output["primary_skills"], location=output["location"], color=color_codes[COLOR], group=groupclo835)
 
 if __name__ == '__main__':
-    image=download_image('https://group5jaas.s3.amazonaws.com/jello.jpg', '/static/jello.jpg')
+    image=download_image('https://group5publics3.s3.amazonaws.com/jello.jpg', '/static/jello.jpg')
     #image=download_file=(fileName, bucket_name)
     print(image)
     
