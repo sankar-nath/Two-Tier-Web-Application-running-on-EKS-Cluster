@@ -17,13 +17,13 @@ COLOR_FROM_ENV = os.environ.get('APP_COLOR') or "lime"
 DBPORT = int(os.environ.get("DBPORT")) or 3306
 groupclo835 = os.environ.get("GROUPNAME") or "defaultGroup"
 bucket_name= "group5jaas2"
-image_url="https://group5jaas2.s3.amazonaws.com/jello.jpg"
+#image_url="https://group5jaas2.s3.amazonaws.com/new.jpg"
 
-key_id= os.environ.get("aws_access_key_id") 
-access_key= os.environ.get("aws_secret_access_key") 
-session_token= os.environ.get("aws_session_token") 
-# groupname= "group 5"
+
 fileName= "jello.jpg"
+objectName= os.environ.get("objectName") or "jello.jpg"
+directory = "static"
+
 
 def download_image(image_url, image_path):
     response = requests.get(image_url)
@@ -38,34 +38,25 @@ def download_image(image_url, image_path):
 #Download the Image from s3 bucket
 def download_file(fileName, bucket_name):
     
-    directory = "static"
+    
     if os.path.exists(directory) and os.path.isdir(directory):
         print("Directory exists")
     else:
         os.makedirs(directory)
-    imagePath = os.path.join(directory, "jello.jpg")
+    imagePath = os.path.join(directory, fileName)
     print(imagePath)
-    object_name = "jello.jpg"
     print(bucket_name)
-    print(object_name)  
-    
     """
     Function to download a given file from an S3 bucket
     """
-    s3 = boto3.resource('s3',
-         aws_access_key_id= 'key_id',
-         aws_secret_access_key= 'access_key',
-         aws_session_token = 'session_token'
-         )
-         
-         
-    
-    print({bucket_name})
-    s3.Bucket(bucket_name).download_file(object_name,imagePath)
+    s3 = boto3.resource("s3",
+            aws_access_key_id='ASIAVHRCFEULB3BRJMX2',
+            aws_secret_access_key='PkWgkOeauBtam8hEVKCTZaZs7RbW5eVKWJRgjv8P',
+            aws_session_token='FwoGZXIvYXdzEEkaDDY7aAN2ynCgsb7TmCLGAQjWQft2Be9yro+tbeIH8+5cSzbxPilz/K3Qf4SXzyK7VqMV7y637zoqQIlZa/GKvPnuQkabfznsT6S+oMW6TpGcs/sMH6cmSPmCE/FariT2ioBij46yILHCwveFWyYDlrhBXvNJm+kXu6OlIKssnHUi/CdwvEjqS0Pb+ri7HE7KHyYSuMu020WBIpf74guFut36zSm4JTn2oguP20/S4+FcHwyI1/Zlbb3CcJyBJTI3A5/RB9b6RsD5u+C9Lb7AGri1ME+VpCjHtPChBjIt4LRDQ/mxADpd8jb32s2UD+pdd9ISF+Qun2q+bY7quU8eaW4UuwAUfidILN6+'
+            )
+    print(bucket_name)
+    s3.Bucket(bucket_name).download_file(objectName,imagePath)
     return imagePath
-
-
-    
 
 
 
@@ -166,8 +157,8 @@ def FetchData():
                            lname=output["last_name"], interest=output["primary_skills"], location=output["location"], color=color_codes[COLOR], group=groupclo835)
 
 if __name__ == '__main__':
-    image=download_image('https://group5jaas.s3.amazonaws.com/jello.jpg', '/static/jello.jpg')
-    #image=download_file=(fileName, bucket_name)
+    #image=download_image('https://group5jaas.s3.amazonaws.com/jello.jpg', '/static/jello.jpg')
+    image=download_file(fileName, bucket_name)
     print(image)
     
     # Check for Command Line Parameters for color
