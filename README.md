@@ -16,7 +16,7 @@ Our application will pull an image hosted on a private s3 server and serve it as
 10.	The application can be accessed from the public IP of the EC2 instance once the loadBalancer has been exposed. You may need to modify the security group to achieve this.Use the public IP:Port of the ec2 instance to access the web app or use port-forwarding
 
 # When running locally
-## install the required MySQL package
+##install the required MySQL package
 
 sudo apt-get update -y
 sudo apt-get install mysql-client -y
