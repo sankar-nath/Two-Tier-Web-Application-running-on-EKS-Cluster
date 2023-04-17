@@ -108,7 +108,7 @@ def home():
 def about():
     return render_template('about.html', color=color_codes[COLOR])
     
-@app.route("/addemp", methods=['POST'])
+@app.route("/addemp", methods=['POST'], group=groupclo835)
 def AddEmp():
     emp_id = request.form['emp_id']
     first_name = request.form['first_name']
