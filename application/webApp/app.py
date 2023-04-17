@@ -22,8 +22,8 @@ bucket_name= "group5jaas2"
 #access_key= os.environ.get("aws_secret_access_key") 
 #session_token= os.environ.get("aws_session_token") 
 groupname= "group 5"
-fileName= os.environ.get("s3filename") or "jello.jpg"
-objectName= "jello.jpg"
+fileName= "jello.jpg"
+objectName= os.environ.get("objectName") or "jello.jpg"
 directory = "static"
 
 def download_image(image_url, image_path):
