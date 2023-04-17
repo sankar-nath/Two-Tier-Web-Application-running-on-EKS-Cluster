@@ -3,7 +3,7 @@ The web application takes in employee details and stores it in a database.
 Both the app and the database have been containerized and will be running as a part of a deployment on a Amazon EKS cluster.
 Our application will pull an image hosted on a private s3 server and serve it as the background image of the application. 
 
-Instructions
+#Instructions
 1.	Create ECR repositories and the security group using either the terraformCode folder or from the AWS console
 2.	Create a private s3 bucket in the AWS console and add some images in there
 3.	It is recommended to run the app locally first, then as docker containers and then on the EKS cluster
@@ -15,8 +15,7 @@ Instructions
 9.	Use kubectl apply on the yaml files to set up the pods, the services and the deployment. 
 10.	The application can be accessed from the public IP of the EC2 instance once the loadBalancer has been exposed. You may need to modify the security group to achieve this.Use the public IP:Port of the ec2 instance to access the web app or use port-forwarding
 
-#When running locally
-#Install the required MySQL package
+# When running locally, install the required MySQL package
 
 sudo apt-get update -y
 sudo apt-get install mysql-client -y
