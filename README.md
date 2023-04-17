@@ -1,4 +1,4 @@
-This repository was cloned from my professor's repo to complete the second assignment for CLO835
+This repository was cloned from my professor's repo to complete the final project for CLO835
 In this Assignment we deployed containerized application on a K8s kind cluster running on an Ec2 instance. The web application takes in employee details and stores it in a database. Both the app and the database are being run as containers running on an EC2 instance.
 
 Instructions
