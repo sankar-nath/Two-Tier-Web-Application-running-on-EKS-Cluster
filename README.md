@@ -40,6 +40,12 @@ sudo python app.py
 
 ### Get the IP of the database and export it as DBHOST variable
 ```docker inspect <container_id>```
+
+
+### Example when running DB runs as a docker container and app is running locally
+```
+export DBHOST=127.0.0.1
+export DBPORT=3307
 ```
 ### Example when running DB runs as a docker container and app is running locally
 ```
