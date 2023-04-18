@@ -10,6 +10,13 @@ Instructions
 5. The application can be accessed from the public IP of the EC2 instance once the NodePort has been exposed. You may need to modify the security group to achieve this.
 4. Use the public IP:Port of the ec2 instance to access the web app
 
+# Loadbalancer
+
+1. Running the Loadbalancer by deploying the colorappService.yaml file and then running the configmap which pulls the background image from the container.
+2. To chnage the background image we delete the colorappDeployment.yaml and configMap.yaml (in this order) in the terminal.
+3. Then reapply configMap.yaml and colorappDeployment.yaml(in this order) with another image. 
+
+
 # Install the required MySQL package
 
 sudo apt-get update -y
